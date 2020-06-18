@@ -1,0 +1,40 @@
+
+
+
+public IPage<DeptCompInputModel> getPage(int pageSize, int pageIndex) {
+
+		dto.setPageSize(pageSize);
+		dto.setPageIndex(pageIndex);
+
+		DiffDataObj data = (DiffDataObj) ClientTransporter
+				.sendData(action, dto); 
+		setLabelText(data.getTotal());
+		List<DeptCompInputModel> models = BarRecordConverter
+				.converDeptCompInptuModel(data);
+		//data.getAllTotal() 差异数据记录总数;
+		//data.getTotal() 记录总数;
+		return new Page(models, data.getAllTotal(), pageSize, pageIndex);
+	}
+
+	public void setLabelText(int num) {
+		String message = MessageFormat.format(title, new Object[] { num });
+		label.setText(message);
+	}
+
+	public List<DeptCompInputModel> getAllData() {
+		return pageViewer.getAllData();
+	}
+
+	public void initPageData() {
+		pageViewer.initPageData();
+	}
+
+	public void setDto(BarRecordDto dto) {
+		this.dto = dto;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+}
