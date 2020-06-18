@@ -36,5 +36,6 @@ public IPage<DeptCompInputModel> getPage(int pageSize, int pageIndex) {
 	public void setAction(String action) {
 		this.action = action;
 	}
+小高学GIT
 
 }
